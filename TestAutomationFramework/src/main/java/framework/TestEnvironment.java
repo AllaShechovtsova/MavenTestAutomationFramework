@@ -62,9 +62,7 @@ if (keyWord.length()<line.length()) {
 		 pathToEnvironmentCreationScripts=getValueFromFile(DATA_FILE, "pathToEnvironmentCreationScripts" );
 		 pathToTestCaseDocument=getValueFromFile(DATA_FILE, "pathToTestCaseDocument" );
 		 pathToReportingFolder=getValueFromFile(DATA_FILE, "pathToReportingFolder" );
-		 
-		 System.out.println(dataBaseUserName);
-		 System.out.println(dataBasePassword);
+	
 		
 	}
 	
@@ -73,8 +71,7 @@ if (keyWord.length()<line.length()) {
 		//2. read line by line
 		//3. open connection database
 		//4.exsecute query from line
-		 System.out.println(dataBaseUserName);
-		 System.out.println(dataBasePassword);
+		
 		  
 		
 		String sqlStatement = "";
