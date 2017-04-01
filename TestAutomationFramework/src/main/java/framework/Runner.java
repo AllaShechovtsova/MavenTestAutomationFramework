@@ -9,7 +9,8 @@ public class Runner {
 	 TestEnvironment myInstance=new TestEnvironment();
 	 myInstance.initialiseEnvironmentVariables();
 	 //myInstance.createEnvironment();
-	myInstance.runTests();
+	myInstance.helpRunTests();
+	//myInstance.runTests();
 	// myInstance.sendTestReports();
  }
 }
