@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.io.FileNotFoundException;
@@ -11,8 +12,8 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class TestEnvironment {
-	//public static final String DATA_FILE = "C://Users//Sergii//git//AllaRepo//MavenTestAutomationFramework//TestAutomationFramework//src//main//java//ini//Framework.ini";
-	public static final String DATA_FILE = "C://Users//Алла//git//MavenTestAutomationFramework//TestAutomationFramework//src//main//java//ini//Framework.ini";
+	public static final String DATA_FILE = "C://Users//Sergii//git//AllaRepo//MavenTestAutomationFramework//TestAutomationFramework//src//main//java//ini//Framework.ini";
+	//public static final String DATA_FILE = "C://Users//Алла//git//MavenTestAutomationFramework//TestAutomationFramework//src//main//java//ini//Framework.ini";
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver"; 
 	public String dataBaseConnectionString="";
 	
@@ -92,8 +93,31 @@ if (keyWord.length()<line.length()) {
 
 	}
 
-	public void runTests() {
-		// TODO Auto-generated method stub
+	public void helpRunTests() throws FileNotFoundException, IOException, ClassNotFoundException, SQLException {
+		//1.open text file with sql queries
+		//2.open blank exsel work book,create sheet and create structure like a file TestCases.xlsx
+		//3.put all sql queries from text file to exsel
+		//4.execute every query and write result to exsel in form of 1001;2001;3001;
+		
+		String sqlStatement = "";
+		Connection conn = null;
+		Statement stmt = null; 
+		Class.forName("com.mysql.jdbc.Driver");
+		conn = DriverManager.getConnection(dataBaseConnectionString, dataBaseUserName,dataBasePassword );
+		stmt = conn.createStatement();
+		String sql = "SELECT flightNumber FROM `testclub`.`flight` WHERE departureAirport='London' AND arrivalAirport='Munich' AND averageTicketPrice<100 AND availableSeats>4";
+	      ResultSet rs = stmt.executeQuery(sql);
+	      while(rs.next()){
+	          //Retrieve by column name
+	          int flightNumber  = rs.getInt("flightNumber");
+	         
+	          //Display values
+	          System.out.print(flightNumber+";");
+	        
+	       }
+	       rs.close();
+	      
+
 
 	}
 
