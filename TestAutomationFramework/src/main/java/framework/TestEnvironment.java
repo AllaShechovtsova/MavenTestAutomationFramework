@@ -2,23 +2,17 @@ package framework;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-
-
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
 public class TestEnvironment {
-	public static final String DATA_FILE = "C://Users//Sergii//git//AllaRepo//MavenTestAutomationFramework//TestAutomationFramework//src//main//java//ini//Framework.ini";
-	//public static final String DATA_FILE = "C://Users//44-135//new_workspace//maven.1488027539228//TestAutomationFramework//src//main//java//ini//Framework.ini";
+	//public static final String DATA_FILE = "C://Users//Sergii//git//AllaRepo//MavenTestAutomationFramework//TestAutomationFramework//src//main//java//ini//Framework.ini";
+	public static final String DATA_FILE = "C://Users//Алла//git//MavenTestAutomationFramework//TestAutomationFramework//src//main//java//ini//Framework.ini";
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver"; 
 	public String dataBaseConnectionString="";
 	

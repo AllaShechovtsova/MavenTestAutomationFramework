@@ -1,3 +1,4 @@
-CREATE TABLE `testclub`.`airlines` (  `flightNumber` INT NOT NULL,   `airline` VARCHAR(45) NULL,   `additionalSpaceService` VARCHAR(45) NULL,   `webRegistration` VARCHAR(45) NULL,   `isMealincluded` VARCHAR(45) NULL,   PRIMARY KEY (`flightNumber`));
-CREATE TABLE `testclub`.`airlines2` (  `flightNumber` INT NOT NULL,   `airline` VARCHAR(45) NULL,   `additionalSpaceService` VARCHAR(45) NULL,   `webRegistration` VARCHAR(45) NULL,   `isMealincluded` VARCHAR(45) NULL,   PRIMARY KEY (`flightNumber`));
-CREATE TABLE `testclub`.`airlines3` (  `flightNumber` INT NOT NULL,   `airline` VARCHAR(45) NULL,   `additionalSpaceService` VARCHAR(45) NULL,   `webRegistration` VARCHAR(45) NULL,   `isMealincluded` VARCHAR(45) NULL,   PRIMARY KEY (`flightNumber`));
+CREATE TABLE `sys`.`airports` (  `id_airport` VARCHAR(45) NOT NULL,  `dutyFree` VARCHAR(45) NOT NULL,  `priorityBoarding` VARCHAR(45) NOT NULL, PRIMARY KEY (`id_airport`));
+
+  
+  
