@@ -8,8 +8,8 @@ public class Runner {
  public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException{
 	 TestEnvironment myInstance=new TestEnvironment();
 	 myInstance.initialiseEnvironmentVariables();
-	 //myInstance.createEnvironment();
-	myInstance.helpRunTests();
+	 myInstance.createEnvironment();
+	myInstance.anotherHelpRunTests();
 	//myInstance.runTests();
 	// myInstance.sendTestReports();
  }

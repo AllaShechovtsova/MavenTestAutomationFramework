@@ -12,8 +12,8 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class TestEnvironment {
-	public static final String DATA_FILE = "C://Users//Sergii//git//AllaRepo//MavenTestAutomationFramework//TestAutomationFramework//src//main//java//ini//Framework.ini";
-	//public static final String DATA_FILE = "C://Users//Алла//git//MavenTestAutomationFramework//TestAutomationFramework//src//main//java//ini//Framework.ini";
+	//public static final String DATA_FILE = "C://Users//Sergii//git//AllaRepo//MavenTestAutomationFramework//TestAutomationFramework//src//main//java//ini//Framework.ini";
+	public static final String DATA_FILE = "C://Users//TEMP//git//MavenTestAutomationFramework//MavenTestAutomationFramework//TestAutomationFramework//src//main//java//ini//Framework_home.ini";
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver"; 
 	public String dataBaseConnectionString="";
 	
@@ -62,63 +62,58 @@ if (keyWord.length()<line.length()) {
 	}
 	
 	public void createEnvironment() throws FileNotFoundException, IOException, ClassNotFoundException, SQLException  {
-		 //1. open text file with scrips
-		//2. read line by line
-		//3. open connection database
-		//4.exsecute query from line
-		
+		   //1. open text file with scrips
+		  //2. read line by line
+		  //3. open connection database
+		  //4.exsecute query from line
 		  
-		
-		String sqlStatement = "";
-		Connection conn = null;
-		Statement stmt = null; 
-		Class.forName("com.mysql.jdbc.Driver");
-		conn = DriverManager.getConnection(dataBaseConnectionString, dataBaseUserName,dataBasePassword );
-		//conn = DriverManager.getConnection("jdbc:mysql://localhost", "root","root" );
-		File f = new File(pathToEnvironmentCreationScripts);
+		    
+		  
+		  String sqlStatement = "";
+		  Connection conn = null;
+		  Statement stmt = null; 
+		  Class.forName("com.mysql.jdbc.Driver");
+		  conn = DriverManager.getConnection("jdbc:mysql://localhost", "root","root" );
+		  File f = new File(pathToEnvironmentCreationScripts);
 
-        BufferedReader b = new BufferedReader(new FileReader(f));
-      
+		        BufferedReader b = new BufferedReader(new FileReader(f));
+		      
 
-        
+		        
 
-        while ((sqlStatement = b.readLine()) != null) {
-        	stmt = conn.createStatement();	
-        	stmt.executeUpdate(sqlStatement);
-        	
-        	
-        	
-        }
-		
-
+		        while ((sqlStatement = b.readLine()) != null) {
+		         stmt = conn.createStatement(); 
+		         stmt.executeUpdate(sqlStatement);
+		         
+		         
+		         
+		        }
 	}
 
-	public void helpRunTests() throws FileNotFoundException, IOException, ClassNotFoundException, SQLException {
+	public void anotherHelpRunTests() throws FileNotFoundException, IOException, ClassNotFoundException, SQLException {
 		//1.open text file with sql queries
 		//2.open blank exsel work book,create sheet and create structure like a file TestCases.xlsx
 		//3.put all sql queries from text file to exsel
 		//4.execute every query and write result to exsel in form of 1001;2001;3001;
-		
-		String sqlStatement = "";
 		Connection conn = null;
-		Statement stmt = null; 
-		Class.forName("com.mysql.jdbc.Driver");
-		conn = DriverManager.getConnection(dataBaseConnectionString, dataBaseUserName,dataBasePassword );
-		stmt = conn.createStatement();
-		String sql = "SELECT flightNumber FROM `testclub`.`flight` WHERE departureAirport='London' AND arrivalAirport='Munich' AND averageTicketPrice<100 AND availableSeats>4";
-	      ResultSet rs = stmt.executeQuery(sql);
-	      while(rs.next()){
-	          //Retrieve by column name
-	          int flightNumber  = rs.getInt("flightNumber");
+		  Statement stmt = null; 
+		  Class.forName("com.mysql.jdbc.Driver");
+		  //conn = DriverManager.getConnection(dataBaseConnectionString, dataBaseUserName,dataBasePassword );
+		  conn = DriverManager.getConnection("jdbc:mysql://localhost", dataBaseUserName,dataBasePassword );
+		  stmt = conn.createStatement();
+		  String sql = "SELECT flightNumber FROM `testclub`.`flight` WHERE departureAirport='London' AND arrivalAirport='Munich' AND averageTicketPrice<100 AND availableSeats>4";
+	       ResultSet rs = stmt.executeQuery(sql);
+	       while(rs.next()){
+	           //Retrieve by column name
+	           int flightNumber  = rs.getInt("flightNumber");
+	          
+	           //Display values
+	           System.out.print(flightNumber+";");
 	         
-	          //Display values
-	          System.out.print(flightNumber+";");
-	        
-	       }
-	       rs.close();
-	      
-
-
+	        }
+	        rs.close();
+		
+		
 	}
 
 	public void sendTestReports() {
