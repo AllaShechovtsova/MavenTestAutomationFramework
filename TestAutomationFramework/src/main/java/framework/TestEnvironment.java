@@ -7,7 +7,18 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.DataFormat;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -22,6 +33,8 @@ public class TestEnvironment {
 	public String pathToEnvironmentCreationScripts="";
 	public String pathToTestCaseDocument="";
 	public String pathToReportingFolder="";
+	private String pathMyQueries="";
+	private String sql;
 
 	private String getValueFromFile(String fileName, String keyWord) {
 
@@ -57,7 +70,7 @@ if (keyWord.length()<line.length()) {
 		 pathToEnvironmentCreationScripts=getValueFromFile(DATA_FILE, "pathToEnvironmentCreationScripts" );
 		 pathToTestCaseDocument=getValueFromFile(DATA_FILE, "pathToTestCaseDocument" );
 		 pathToReportingFolder=getValueFromFile(DATA_FILE, "pathToReportingFolder" );
-	
+		 pathMyQueries=getValueFromFile(DATA_FILE, "pathMyQueries" );
 		
 	}
 	
@@ -96,12 +109,29 @@ if (keyWord.length()<line.length()) {
 		//3.put all sql queries from text file to exsel
 		//4.execute every query and write result to exsel in form of 1001;2001;3001;
 		Connection conn = null;
+		String sqlStatement = "";
 		  Statement stmt = null; 
 		  Class.forName("com.mysql.jdbc.Driver");
 		  //conn = DriverManager.getConnection(dataBaseConnectionString, dataBaseUserName,dataBasePassword );
+		  File f = new File(pathMyQueries);
+
+	        BufferedReader b = new BufferedReader(new FileReader(f));
+	      
+
+	        
+
+	        while ((sqlStatement = b.readLine()) != null) {
+	         stmt = conn.createStatement(); 
+	         stmt.executeUpdate(sqlStatement);
+	         
+	         
+	         
+	        }
+		  
+		  
 		  conn = DriverManager.getConnection("jdbc:mysql://localhost", dataBaseUserName,dataBasePassword );
 		  stmt = conn.createStatement();
-		  String sql = "SELECT flightNumber FROM `testclub`.`flight` WHERE departureAirport='London' AND arrivalAirport='Munich' AND averageTicketPrice<100 AND availableSeats>4";
+		  //String sql = "SELECT flightNumber FROM `testclub`.`flight` WHERE departureAirport='London' AND arrivalAirport='Munich' AND averageTicketPrice<100 AND availableSeats>4";
 	       ResultSet rs = stmt.executeQuery(sql);
 	       while(rs.next()){
 	           //Retrieve by column name
@@ -112,17 +142,60 @@ if (keyWord.length()<line.length()) {
 	         
 	        }
 	        rs.close();
-		
-		
-	}
-
+	        	        
+	           //Create Blank workbook
+	           XSSFWorkbook workbook = new XSSFWorkbook(); 
+	           //Create file system using specific name
+	           FileOutputStream out = new FileOutputStream(
+	           new File("createworkbook.xlsx"));
+	           //write operation workbook using file out object 
+	           workbook.write(out);
+	           out.close();
+	           System.out.println("createworkbook.xlsx written successfully");
+	        }
+	   
 	public void sendTestReports() {
 		// TODO Auto-generated method stub
-
 	}
+	
 
+
+
+public void writeIntoExcel() throws FileNotFoundException, IOException{
+    Workbook book = new HSSFWorkbook();
+    
+    Sheet sheet = book.createSheet("Flights");
+
+    // Нумерация начинается с нуля
+    Row row = sheet.createRow(0); 
+    
+    
+    Cell step = row.createCell(1);
+    step.setCellValue("Step");
+    
+    Cell actionToDo = row.createCell(2);
+    step.setCellValue("actionToDo");
+    
+    Cell expectedResult = row.createCell(3);
+    step.setCellValue("Expected result");
+    
+    Cell actualResult = row.createCell(4);
+    step.setCellValue("Actual result");
+    
+    Cell testResult = row.createCell(5);
+    step.setCellValue("Test result");
+      
+    
+       
+    
+    
+    // Записываем всё в файл
+    FileOutputStream out = new FileOutputStream( new File(pathToTestCaseDocument));
+    	      book.write(out);
+    	      out.close();
 }
 
+}
 
 
 
